@@ -1,0 +1,13 @@
+{
+    "name": "InFog/SimpleFinance",
+    "description": "Ultra Simple Finance Managment",
+    "autoload": {
+            "psr-0": {"": "src/"}
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "slim/slim": "2.*",
+        "slim/extras": "2.*",
+        "twig/twig": "1.*"
+    }
+}
