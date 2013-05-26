@@ -1,6 +1,6 @@
 <?php
 
-namespace InFog\Entities;
+namespace InFog\SimpleFinance\Entities;
 
 class Movement
 {
