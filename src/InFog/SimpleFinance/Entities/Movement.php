@@ -76,12 +76,8 @@ class Movement
         return $this->amount;
     }
 
-    public function setName($name)
+    public function setName(\InFog\SimpleFinance\Types\SmallString $name)
     {
-        if (strlen($name) > 20) {
-            throw new \Exception('$name must be 20 chars or less');
-        }
-
         $this->name = $name;
     }
 
@@ -90,12 +86,8 @@ class Movement
         return $this->name;
     }
 
-    public function setDescription($description)
+    public function setDescription(\InFog\SimpleFinance\Types\Text $description)
     {
-        if (strlen($description) > 255) {
-            throw new \Exception('$description must be 255 chars or less');
-        }
-
         $this->description = $description;
     }
 
