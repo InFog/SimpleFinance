@@ -17,7 +17,7 @@ class Movement
     private $date;
 
     /**
-     * @var float
+     * @var \InFog\SimpleFinance\Types\Money
      * @access private
      */
     private $amount;
@@ -66,12 +66,8 @@ class Movement
         return $this->date;
     }
 
-    public function setAmount($amount)
+    public function setAmount(\InFog\SimpleFinance\Types\Money $amount)
     {
-        if (! is_numeric($amount)) {
-            throw new \Exception('$amount must be float');
-        }
-
         $this->amount = $amount;
     }
 
