@@ -1,5 +1,7 @@
 # Simple Finance
 
+[![Build Status](https://travis-ci.org/InFog/SimpleFinance.png?branch=master)](https://travis-ci.org/InFog/SimpleFinance)
+
 Simple Finance is an ultra simple finance managent. Just keep track of your
 money!
 
