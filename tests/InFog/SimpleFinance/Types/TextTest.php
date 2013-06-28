@@ -26,4 +26,15 @@ class TextTest extends PHPUnit_Framework_TestCase
             deserunt mollit anim id est laborum."
         );
     }
+
+    public function testShouldCreateTextAndConcatenate()
+    {
+        $text1 = new \InFog\SimpleFinance\Types\Text('My testing text');
+        $text2 = new \InFog\SimpleFinance\Types\Text(' is awesome!');
+
+        $expected = 'My testing text is awesome!';
+        $result = $text1 . $text2;
+
+        $this->assertEquals($expected, $result);
+    }
 }

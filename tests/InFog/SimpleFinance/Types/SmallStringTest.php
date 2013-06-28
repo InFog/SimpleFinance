@@ -19,4 +19,15 @@ class SmallStringTest extends PHPUnit_Framework_TestCase
             "The quick brown fox jumps over the lazy dog"
         );
     }
+
+    public function testShouldCreateSmallStringAndConcatenate()
+    {
+        $firstName = new \InFog\SimpleFinance\Types\SmallString('Evaldo');
+        $lastName = new \InFog\SimpleFinance\Types\SmallString('Bento');
+
+        $expected = 'Evaldo Bento';
+        $result = "{$firstName} {$lastName}";
+
+        $this->assertEquals($expected, $result);
+    }
 }
