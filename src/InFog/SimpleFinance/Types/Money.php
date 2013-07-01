@@ -11,22 +11,10 @@ class Money
     private $value;
 
     /**
-     * @var string
+     * @var \InFog\SimpleFinance\Types\Money\Config
      * @access private
      */
-    private $decimalPoint = '.';
-
-    /**
-     * @var string
-     * @access private
-     */
-    private $thousandsSeparator = ',';
-
-    /**
-     * @var string
-     * @access private
-     */
-    private $moneySymbol = '$';
+    private $config;
 
     public function __construct($value, \InFog\SimpleFinance\Types\Money\Config $config = null)
     {
@@ -39,17 +27,16 @@ class Money
 
     public function setConfig(\InFog\SimpleFinance\Types\Money\Config $config = null)
     {
+        $this->config = new \InFog\SimpleFinance\Types\Money\Config();
         if ($config) {
-            $this->decimalPoint = $config->getDecimalPoint();
-            $this->thousandsSeparator = $config->getThousandsSeparator();
-            $this->moneySymbol = $config->getMoneySymbol();
+            $this->config = $config;
         }
     }
 
     public function __toString()
     {
-        return $this->moneySymbol . ' ' . number_format($this->value, 2,
-            $this->decimalPoint, $this->thousandsSeparator
+        return $this->config->getMoneySymbol() . ' ' . number_format($this->value, 2,
+            $this->config->getDecimalPoint(), $this->config->getThousandsSeparator()
         );
     }
 }
