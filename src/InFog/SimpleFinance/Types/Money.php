@@ -33,6 +33,11 @@ class Money
         }
     }
 
+    public function getValue()
+    {
+        return $this->value;
+    }
+
     public function __toString()
     {
         return $this->config->getMoneySymbol() . ' ' . number_format($this->value, 2,

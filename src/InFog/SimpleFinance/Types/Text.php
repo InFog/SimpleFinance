@@ -22,6 +22,11 @@ class Text
         $this->value = $value;
     }
 
+    public function getValue()
+    {
+        return $this->value;
+    }
+
     public function __toString()
     {
         return $this->value;
