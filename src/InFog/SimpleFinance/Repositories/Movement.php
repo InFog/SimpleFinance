@@ -51,6 +51,37 @@ class Movement
         return $movementDTO->id;
     }
 
+    public static function fetch(array $conditions)
+    {
+        $mapper = self::getMapper();
+        $movementDTO = $mapper->movement($conditions)->fetch();
+
+        return \InFog\SimpleFinance\Entities\Movement::createFromArray(
+            (array) $movementDTO
+        );
+    }
+
+    public static function fetchAll(array $conditions = null)
+    {
+        if (is_array($conditions)) {
+            return self::fetchConditions($conditions);
+        }
+
+        $mapper = self::getMapper();
+        return self::createCollection($mapper->movement->fetchAll());
+    }
+
+    private static function createCollection(array $movements)
+    {
+        $collection = new \InFog\SimpleFinance\Collections\Movement();
+
+        foreach ($movements as $movement) {
+            $collection->add(\InFog\SimpleFinance\Entities\Movement::createFromArray((array) $movement));
+        }
+
+        return $collection;
+    }
+
     public static function createDTO(\InFog\SimpleFinance\Entities\Movement $movement)
     {
         $dto = new \stdClass();

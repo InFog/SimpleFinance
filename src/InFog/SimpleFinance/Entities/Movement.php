@@ -38,10 +38,11 @@ class Movement
     {
         $movement = new self;
 
-        $movement->setDate($data['date']);
-        $movement->setAmount($data['amount']);
-        $movement->setName($data['name']);
-        $movement->setDescription($data['description']);
+        $movement->setId((isset($data['id'])) ? $data['id'] : null);
+        $movement->setDate(new \DateTime($data['date']));
+        $movement->setAmount(new \InFog\SimpleFinance\Types\Money($data['amount']));
+        $movement->setName(new \InFog\SimpleFinance\Types\SmallString($data['name']));
+        $movement->setDescription(new \InFog\SimpleFinance\Types\Text($data['description']));
 
         return $movement;
     }
