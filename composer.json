@@ -10,5 +10,8 @@
         "slim/extras": "2.*",
         "twig/twig": "1.*",
         "respect/relational": "dev-master"
+    },
+    "require-dev": {
+        "satooshi/php-coveralls": "dev-master"
     }
 }
