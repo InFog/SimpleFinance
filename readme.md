@@ -5,6 +5,15 @@
 Simple Finance is an ultra simple finance managent. Just keep track of your
 money!
 
+## About this project
+
+This is a personal project, I made it because I do really need to keep track
+of my pretty little money. I'm also studing some PHP best practices and
+what the cool kids are doing. That's why I'm using Composer for dependency
+management, PHPUnit for unit testing, Travis-CI for Continuous Integration
+and Coveralls for code coverage. I want this project to be an example of a
+good PHP project.
+
 ## General usage
 
 Simple Finance is for geeks and nerds, sorry... If you're not, just ask one to
@@ -24,6 +33,13 @@ database conection and access from a browser to setup a password. And you're
 done.
 
 Enjoy!
+
+## Contribute
+
+Want to contribute? Just fork the whole thing and do what you want to do.
+Then send me a pull request :-)
+
+Don't forget to unit test your stuff! I'll not accept not tested code!
 
 ## License
 
