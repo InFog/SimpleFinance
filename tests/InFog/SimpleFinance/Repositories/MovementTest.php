@@ -62,12 +62,28 @@ class MovementRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\\InFog\\SimpleFinance\\Collections\\Movement', $movementCollection);
     }
 
-    private function createAMovement()
+    public function testRetrieveMovementCollectionWithConditions()
     {
+        $this->createAMovement();
+        $this->createAMovement();
+        $this->createAMovement('Other name', 1000);
+        $this->createAMovement('Another name', 1000);
+
+        $movementCollection = \InFog\SimpleFinance\Repositories\Movement::fetchAll(array('amount >=' => 1000));
+
+        $this->assertInstanceOf('\\InFog\\SimpleFinance\\Collections\\Movement', $movementCollection);
+        $this->assertEquals(2, count($movementCollection));
+    }
+
+    private function createAMovement($name = null, $amount = null)
+    {
+        $name = ($name) ? $name : 'Testing Repository';
+        $amount = ($amount) ? $amount : 10;
+
         $movement = new \InFog\SimpleFinance\Entities\Movement();
         $movement->setDate(new \DateTime());
-        $movement->setAmount(new \InFog\SimpleFinance\Types\Money(10));
-        $movement->setName(new \InFog\SimpleFinance\Types\SmallString('Testing Repository'));
+        $movement->setAmount(new \InFog\SimpleFinance\Types\Money($amount));
+        $movement->setName(new \InFog\SimpleFinance\Types\SmallString($name));
         $movement->setDescription(new \InFog\SimpleFinance\Types\Text('Description of a movement'));
 
         return \InFog\SimpleFinance\Repositories\Movement::save($movement);

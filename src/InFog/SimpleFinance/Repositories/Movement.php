@@ -71,6 +71,12 @@ class Movement
         return self::createCollection($mapper->movement->fetchAll());
     }
 
+    private static function fetchConditions(array $conditions)
+    {
+        $mapper = self::getMapper();
+        return self::createCollection($mapper->movement($conditions)->fetchAll());
+    }
+
     private static function createCollection(array $movements)
     {
         $collection = new \InFog\SimpleFinance\Collections\Movement();
