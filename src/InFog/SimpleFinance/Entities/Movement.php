@@ -23,13 +23,13 @@ class Movement
     private $amount;
 
     /**
-     * @var string[20]
+     * @var \InFog\SimpleFinance\Types\SmallString
      * @access private
      */
     private $name;
 
     /**
-     * @var string[255]
+     * @var \InFog\SimpleFinance\Types\Text
      * @access private
      */
     private $description;
