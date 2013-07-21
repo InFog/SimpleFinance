@@ -62,26 +62,27 @@ class MovementRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\\InFog\\SimpleFinance\\Collections\\Movement', $movementCollection);
     }
 
-    public function testRetrieveMovementCollectionWithConditions()
+    public function testRetrieveMovementCollectionFromGivenMonth()
     {
-        $this->createAMovement();
-        $this->createAMovement();
-        $this->createAMovement('Other name', 1000);
-        $this->createAMovement('Another name', 1000);
+        $this->createAMovement(null, null, new \DateTime('2013-03-09'));
+        $this->createAMovement(null, null, new \DateTime('2013-03-18'));
 
-        $movementCollection = \InFog\SimpleFinance\Repositories\Movement::fetchAll(array('amount >=' => 1000));
+        $movementCollection = \InFog\SimpleFinance\Repositories\Movement::fetchMonth(
+            new \InFog\SimpleFinance\Types\Month(2013, 3)
+        );
 
         $this->assertInstanceOf('\\InFog\\SimpleFinance\\Collections\\Movement', $movementCollection);
         $this->assertEquals(2, count($movementCollection));
     }
 
-    private function createAMovement($name = null, $amount = null)
+    private function createAMovement($name = null, $amount = null, \DateTime $date = null)
     {
         $name = ($name) ? $name : 'Testing Repository';
         $amount = ($amount) ? $amount : 10;
+        $date = ($date) ? $date : new \DateTime();
 
         $movement = new \InFog\SimpleFinance\Entities\Movement();
-        $movement->setDate(new \DateTime());
+        $movement->setDate($date);
         $movement->setAmount(new \InFog\SimpleFinance\Types\Money($amount));
         $movement->setName(new \InFog\SimpleFinance\Types\SmallString($name));
         $movement->setDescription(new \InFog\SimpleFinance\Types\Text('Description of a movement'));
