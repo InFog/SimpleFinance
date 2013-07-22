@@ -71,7 +71,7 @@ class Movement
         return self::createCollection($mapper->movement->fetchAll());
     }
 
-    public function fetchMonth(\InFog\SimpleFinance\Types\Month $month)
+    public static function fetchMonth(\InFog\SimpleFinance\Types\Month $month)
     {
         $conditions = array(
             'date >=' => $month->getFirstDay()->format('Y-m-d'),
