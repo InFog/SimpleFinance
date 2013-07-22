@@ -2,7 +2,7 @@
 
 namespace InFog\SimpleFinance\Types;
 
-class Month
+class Month implements Typeable
 {
     /**
      * @var integer
@@ -27,6 +27,12 @@ class Month
 
         $this->year = $year;
         $this->month = $month;
+    }
+
+    public function getValue()
+    {
+        $month = str_pad($this->month, 2, '0', STR_PAD_LEFT);
+        return "{$this->year}-{$month}";
     }
 
     public function getYear()

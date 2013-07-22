@@ -2,7 +2,7 @@
 
 namespace InFog\SimpleFinance\Types;
 
-class Money
+class Money implements Typeable
 {
     /**
      * @var float

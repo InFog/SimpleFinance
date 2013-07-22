@@ -2,7 +2,7 @@
 
 namespace InFog\SimpleFinance\Types;
 
-class SmallString
+class SmallString implements Typeable
 {
     /**
      * @var string

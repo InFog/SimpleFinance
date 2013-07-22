@@ -18,6 +18,16 @@ class MonthTest extends PHPUnit_Framework_TestCase
         $month = new \InFog\SimpleFinance\Types\Month(2011, 'b');
     }
 
+    public function testShouldReturnValue()
+    {
+        $month = new \InFog\SimpleFinance\Types\Month(2002, 3);
+
+        $expected = '2002-03';
+        $result = $month->getValue();
+
+        $this->assertEquals($expected, $result);
+    }
+
     public function testShouldReturnYearAndMonth()
     {
         $month = new \InFog\SimpleFinance\Types\Month(2011, 10);

@@ -2,7 +2,7 @@
 
 namespace InFog\SimpleFinance\Types;
 
-class Text
+class Text implements Typeable
 {
     /**
      * @var string
