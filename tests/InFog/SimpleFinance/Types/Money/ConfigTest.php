@@ -1,6 +1,8 @@
 <?php
 
-class ConfigTest extends PHPUnit_Framework_TestCase
+namespace tests\InFog\SimpleFinance\Types\Money;
+
+class ConfigTest extends \PHPUnit_Framework_TestCase
 {
     public function testShouldSetAndGetDecimalPoint()
     {

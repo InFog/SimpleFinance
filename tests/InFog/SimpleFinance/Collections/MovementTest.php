@@ -1,6 +1,8 @@
 <?php
 
-class Movement extends PHPUnit_Framework_TestCase
+namespace tests\InFog\SimpleFinance\Collections;
+
+class MovementTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreateCollectionAddAndCountItems()
     {

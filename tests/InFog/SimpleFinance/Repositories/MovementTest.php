@@ -1,12 +1,14 @@
 <?php
 
-class MovementRepositoryTest extends PHPUnit_Framework_TestCase
+namespace tests\InFog\SimpleFinance\Repositories;
+
+class MovementTest extends \PHPUnit_Framework_TestCase
 {
     private $pdo;
 
     public function setUp()
     {
-        $this->pdo = new PDO(PDO_DSN);
+        $this->pdo = new \PDO(PDO_DSN);
         $this->pdo->exec(file_get_contents(SETUP_DIR . 'create_sqlite_database.sql'));
 
         \InFog\SimpleFinance\Repositories\Movement::setPdo($this->pdo);
@@ -25,7 +27,7 @@ class MovementRepositoryTest extends PHPUnit_Framework_TestCase
         $movement->setName(new \InFog\SimpleFinance\Types\SmallString('Testing DTO'));
         $movement->setDescription(new \InFog\SimpleFinance\Types\Text('Description of DTO'));
 
-        $expected = new stdClass();
+        $expected = new \stdClass();
         $expected->id = null;
         $expected->date = $movement->getDate()->format('Y-m-d H:i:s');
         $expected->amount = 10;

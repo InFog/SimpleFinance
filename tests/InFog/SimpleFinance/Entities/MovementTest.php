@@ -1,6 +1,8 @@
 <?php
 
-class MovementEntityTest extends PHPUnit_Framework_TestCase
+namespace tests\InFog\SimpleFinance\Entities;
+
+class MovementTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreateFromArray()
     {
@@ -10,7 +12,7 @@ class MovementEntityTest extends PHPUnit_Framework_TestCase
         $expected->setName(new \InFog\SimpleFinance\Types\SmallString('Test'));
         $expected->setDescription(new \InFog\SimpleFinance\Types\Text('Just a test'));
 
-        $result = InFog\SimpleFinance\Entities\Movement::createFromArray(array(
+        $result = \InFog\SimpleFinance\Entities\Movement::createFromArray(array(
             'date' => '2013-01-01',
             'amount' => 100,
             'name' => 'Test',

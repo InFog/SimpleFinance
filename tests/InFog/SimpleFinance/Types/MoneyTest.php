@@ -1,6 +1,8 @@
 <?php
 
-class MoneyTest extends PHPUnit_Framework_TestCase
+namespace tests\InFog\SimpleFinance\Types;
+
+class MoneyTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @expectedException InvalidArgumentException
