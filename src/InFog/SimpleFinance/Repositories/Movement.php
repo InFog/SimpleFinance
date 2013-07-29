@@ -73,9 +73,33 @@ class Movement
 
     public static function fetchMonth(\InFog\SimpleFinance\Types\Month $month)
     {
+        /**
+         * TODO There is a bug in \Respect\Relational when using >= and <= on the same column
+         *      https://github.com/Respect/Relational/issues/35
+         *      I'll remove this weird $key when it gets fixed
+         */
+
+        $key = 'date >= "' . $month->getFirstDay()->format('Y-m-d 00:00:00') . '" AND date <=';
+
         $conditions = array(
-            'date >=' => $month->getFirstDay()->format('Y-m-d'),
-            'date <=' => $month->getLastDay()->format('Y-m-d')
+            $key => $month->getLastDay()->format('Y-m-d 23:59:59')
+        );
+
+        return self::fetchConditions($conditions);
+    }
+
+    public static function fetchPeriod(\DateTime $firstDay, \DateTime $lastDay)
+    {
+        /**
+         * TODO There is a bug in \Respect\Relational when using >= and <= on the same column
+         *      https://github.com/Respect/Relational/issues/35
+         *      I'll remove this weird $key when it gets fixed
+         */
+
+        $key = 'date >= "' . $firstDay->format('Y-m-d 00:00:00') . '" AND date <=';
+
+        $conditions = array(
+            $key => $lastDay->format('Y-m-d 23:59:59')
         );
 
         return self::fetchConditions($conditions);

@@ -73,9 +73,36 @@ class MovementTest extends \PHPUnit_Framework_TestCase
             new \InFog\SimpleFinance\Types\Month(2013, 3)
         );
 
-        // TODO there is a bug in Respect\Relational for conditions on the same column
-        //$this->assertInstanceOf('\\InFog\\SimpleFinance\\Collections\\Movement', $movementCollection);
-        //$this->assertEquals(2, count($movementCollection));
+        $this->assertInstanceOf('\\InFog\\SimpleFinance\\Collections\\Movement', $movementCollection);
+        $this->assertEquals(2, count($movementCollection));
+    }
+
+    public function testRetrieveMovementCollectionFromGivenMonthFirstAndLastDay()
+    {
+        $this->createAMovement(null, null, new \DateTime('2013-01-01'));
+        $this->createAMovement(null, null, new \DateTime('2013-01-31'));
+
+        $movementCollection = \InFog\SimpleFinance\Repositories\Movement::fetchMonth(
+            new \InFog\SimpleFinance\Types\Month(2013, 1)
+        );
+
+        $this->assertInstanceOf('\\InFog\\SimpleFinance\\Collections\\Movement', $movementCollection);
+        $this->assertEquals(2, count($movementCollection));
+    }
+
+    public function testRetrieveMovementCollectionFromGivenPeriod()
+    {
+        $this->createAMovement(null, null, new \DateTime('2012-10-01'));
+        $this->createAMovement(null, null, new \DateTime('2012-10-25'));
+        $this->createAMovement(null, null, new \DateTime('2012-11-05'));
+
+        $movementCollection = \InFog\SimpleFinance\Repositories\Movement::fetchPeriod(
+            new \DateTime('2012-10-01'),
+            new \DateTime('2012-11-30')
+        );
+
+        $this->assertInstanceOf('\\InFog\\SimpleFinance\\Collections\\Movement', $movementCollection);
+        $this->assertEquals(3, count($movementCollection));
     }
 
     private function createAMovement($name = null, $amount = null, \DateTime $date = null)
