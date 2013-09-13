@@ -1,6 +1,7 @@
 # Simple Finance
 [![Build Status](https://travis-ci.org/InFog/SimpleFinance.png?branch=master)](https://travis-ci.org/InFog/SimpleFinance)
 [![Coverage Status](https://coveralls.io/repos/InFog/SimpleFinance/badge.png)](https://coveralls.io/r/InFog/SimpleFinance)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/InFog/SimpleFinance/badges/quality-score.png?s=fbf13b270b31eee937ab6fb5df050d36120a093b)](https://scrutinizer-ci.com/g/InFog/SimpleFinance/)
 
 Simple Finance is an ultra simple finance managent. Just keep track of your
 money!
