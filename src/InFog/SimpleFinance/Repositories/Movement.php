@@ -9,51 +9,51 @@ class Movement
     /**
      * @var $pdo \PDO
      */
-    private static $pdo;
+    private $pdo;
 
     /**
      * @var $mapper \Respect\Relational\Mapper
      */
-    private static $mapper;
+    private $mapper;
 
-    public static function setPdo(\Pdo $pdo)
+    public function setPdo(\PDO $pdo)
     {
-        self::$pdo = $pdo;
+        $this->pdo = $pdo;
     }
 
-    private static function getPdo()
+    private function getPdo()
     {
-        if (! self::$pdo) {
-            self::$pdo = new \PDO(PDO_DSN);
+        if (! $this->pdo) {
+            $this->pdo = new \PDO(PDO_DSN);
         }
 
-        return self::$pdo;
+        return $this->pdo;
     }
 
-    private static function getMapper()
+    private function getMapper()
     {
-        if (! self::$mapper) {
-            self::$mapper = new Mapper(self::getPdo());
-            self::$mapper->entityNamespace = '\\InFog\\SimpleFinance\\Entities';
+        if (! $this->mapper) {
+            $this->mapper = new Mapper($this->getPdo());
+            $this->mapper->entityNamespace = '\\InFog\\SimpleFinance\\Entities';
         }
 
-        return self::$mapper;
+        return $this->mapper;
     }
 
-    public static function save(\InFog\SimpleFinance\Entities\Movement $movement)
+    public function save(\InFog\SimpleFinance\Entities\Movement $movement)
     {
-        $movementDTO = self::createDTO($movement);
+        $movementDTO = $this->createDTO($movement);
 
-        $mapper = self::getMapper();
+        $mapper = $this->getMapper();
         $mapper->movement->persist($movementDTO);
         $mapper->flush();
 
         return $movementDTO->id;
     }
 
-    public static function fetch(array $conditions)
+    public function fetch(array $conditions)
     {
-        $mapper = self::getMapper();
+        $mapper = $this->getMapper();
         $movementDTO = $mapper->movement($conditions)->fetch();
 
         return \InFog\SimpleFinance\Entities\Movement::createFromArray(
@@ -61,17 +61,17 @@ class Movement
         );
     }
 
-    public static function fetchAll(array $conditions = null)
+    public function fetchAll(array $conditions = null)
     {
         if (is_array($conditions)) {
-            return self::fetchConditions($conditions);
+            return $this->fetchConditions($conditions);
         }
 
-        $mapper = self::getMapper();
-        return self::createCollection($mapper->movement->fetchAll());
+        $mapper = $this->getMapper();
+        return $this->createCollection($mapper->movement->fetchAll());
     }
 
-    public static function fetchMonth(\InFog\SimpleFinance\Types\Month $month)
+    public function fetchMonth(\InFog\SimpleFinance\Types\Month $month)
     {
         /**
          * TODO There is a bug in \Respect\Relational when using >= and <= on the same column
@@ -85,10 +85,10 @@ class Movement
             $key => $month->getLastDay()->format('Y-m-d 23:59:59')
         );
 
-        return self::fetchConditions($conditions);
+        return $this->fetchConditions($conditions);
     }
 
-    public static function fetchPeriod(\DateTime $firstDay, \DateTime $lastDay)
+    public function fetchPeriod(\DateTime $firstDay, \DateTime $lastDay)
     {
         /**
          * TODO There is a bug in \Respect\Relational when using >= and <= on the same column
@@ -102,16 +102,16 @@ class Movement
             $key => $lastDay->format('Y-m-d 23:59:59')
         );
 
-        return self::fetchConditions($conditions);
+        return $this->fetchConditions($conditions);
     }
 
-    private static function fetchConditions(array $conditions)
+    private function fetchConditions(array $conditions)
     {
-        $mapper = self::getMapper();
-        return self::createCollection($mapper->movement($conditions)->fetchAll());
+        $mapper = $this->getMapper();
+        return $this->createCollection($mapper->movement($conditions)->fetchAll());
     }
 
-    private static function createCollection(array $movements)
+    private function createCollection(array $movements)
     {
         $collection = new \InFog\SimpleFinance\Collections\Movement();
 
@@ -122,7 +122,7 @@ class Movement
         return $collection;
     }
 
-    public static function createDTO(\InFog\SimpleFinance\Entities\Movement $movement)
+    public function createDTO(\InFog\SimpleFinance\Entities\Movement $movement)
     {
         $dto = new \stdClass();
 

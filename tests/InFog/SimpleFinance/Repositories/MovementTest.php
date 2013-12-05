@@ -2,6 +2,8 @@
 
 namespace tests\InFog\SimpleFinance\Repositories;
 
+use \InFog\SimpleFinance\Repositories\Movement as Repository;
+
 class MovementTest extends \PHPUnit_Framework_TestCase
 {
     private $pdo;
@@ -11,7 +13,9 @@ class MovementTest extends \PHPUnit_Framework_TestCase
         $this->pdo = new \PDO(PDO_DSN);
         $this->pdo->exec(file_get_contents(SETUP_DIR . 'create_sqlite_database.sql'));
 
-        \InFog\SimpleFinance\Repositories\Movement::setPdo($this->pdo);
+        $this->repository = new Repository();
+
+        $this->repository->setPdo($this->pdo);
     }
 
     public function tearDown()
@@ -34,7 +38,7 @@ class MovementTest extends \PHPUnit_Framework_TestCase
         $expected->name = 'Testing DTO';
         $expected->description = 'Description of DTO';
 
-        $result = \InFog\SimpleFinance\Repositories\Movement::createDTO($movement);
+        $result = $this->repository->createDTO($movement);
 
         $this->assertEquals($expected, $result);
     }
@@ -50,7 +54,7 @@ class MovementTest extends \PHPUnit_Framework_TestCase
     {
         $movement_id = $this->createAMovement();
 
-        $movement = \InFog\SimpleFinance\Repositories\Movement::fetch(array('id' => $movement_id));
+        $movement = $this->repository->fetch(array('id' => $movement_id));
 
         $this->assertInstanceOf('\\InFog\\SimpleFinance\\Entities\\Movement', $movement);
     }
@@ -59,7 +63,7 @@ class MovementTest extends \PHPUnit_Framework_TestCase
     {
         $this->createAMovement();
 
-        $movementCollection = \InFog\SimpleFinance\Repositories\Movement::fetchAll();
+        $movementCollection = $this->repository->fetchAll();
 
         $this->assertInstanceOf('\\InFog\\SimpleFinance\\Collections\\Movement', $movementCollection);
     }
@@ -69,7 +73,7 @@ class MovementTest extends \PHPUnit_Framework_TestCase
         $this->createAMovement(null, null, new \DateTime('2013-03-09'));
         $this->createAMovement(null, null, new \DateTime('2013-03-18'));
 
-        $movementCollection = \InFog\SimpleFinance\Repositories\Movement::fetchMonth(
+        $movementCollection = $this->repository->fetchMonth(
             new \InFog\SimpleFinance\Types\Month(2013, 3)
         );
 
@@ -82,7 +86,7 @@ class MovementTest extends \PHPUnit_Framework_TestCase
         $this->createAMovement(null, null, new \DateTime('2013-01-01'));
         $this->createAMovement(null, null, new \DateTime('2013-01-31'));
 
-        $movementCollection = \InFog\SimpleFinance\Repositories\Movement::fetchMonth(
+        $movementCollection = $this->repository->fetchMonth(
             new \InFog\SimpleFinance\Types\Month(2013, 1)
         );
 
@@ -96,7 +100,7 @@ class MovementTest extends \PHPUnit_Framework_TestCase
         $this->createAMovement(null, null, new \DateTime('2012-10-25'));
         $this->createAMovement(null, null, new \DateTime('2012-11-05'));
 
-        $movementCollection = \InFog\SimpleFinance\Repositories\Movement::fetchPeriod(
+        $movementCollection = $this->repository->fetchPeriod(
             new \DateTime('2012-10-01'),
             new \DateTime('2012-11-30')
         );
@@ -117,6 +121,6 @@ class MovementTest extends \PHPUnit_Framework_TestCase
         $movement->setName(new \InFog\SimpleFinance\Types\SmallString($name));
         $movement->setDescription(new \InFog\SimpleFinance\Types\Text('Description of a movement'));
 
-        return \InFog\SimpleFinance\Repositories\Movement::save($movement);
+        return $this->repository->save($movement);
     }
 }
