@@ -2,13 +2,15 @@
 
 namespace tests\InFog\SimpleFinance\Types\Money;
 
+use \InFog\SimpleFinance\Types\Money\Config as MoneyConfig;
+
 class ConfigTest extends \PHPUnit_Framework_TestCase
 {
     public function testShouldSetAndGetDecimalPoint()
     {
         $expected = '#';
 
-        $config = new \InFog\SimpleFinance\Types\Money\Config();
+        $config = new MoneyConfig();
         $config->setDecimalPoint($expected);
 
         $result = $config->getDecimalPoint();
@@ -21,7 +23,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldSetInvalidDecimalPoint()
     {
-        $config = new \InFog\SimpleFinance\Types\Money\Config();
+        $config = new MoneyConfig();
         $config->setDecimalPoint(array(1));
     }
 
@@ -29,7 +31,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     {
         $expected = '#';
 
-        $config = new \InFog\SimpleFinance\Types\Money\Config();
+        $config = new MoneyConfig();
         $config->setThousandsSeparator($expected);
 
         $result = $config->getThousandsSeparator();
@@ -42,7 +44,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldSetInvalidThousandsSeparator()
     {
-        $config = new \InFog\SimpleFinance\Types\Money\Config();
+        $config = new MoneyConfig();
         $config->setThousandsSeparator(array(1));
     }
 
@@ -50,7 +52,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     {
         $expected = '#';
 
-        $config = new \InFog\SimpleFinance\Types\Money\Config();
+        $config = new MoneyConfig();
         $config->setMoneySimbol($expected);
 
         $result = $config->getMoneySymbol();
@@ -63,7 +65,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldSetInvalidMoneySimbol()
     {
-        $config = new \InFog\SimpleFinance\Types\Money\Config();
+        $config = new MoneyConfig();
         $config->setMoneySimbol(array(1));
     }
 }

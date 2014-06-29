@@ -2,7 +2,12 @@
 
 namespace tests\InFog\SimpleFinance\Repositories;
 
-use \InFog\SimpleFinance\Repositories\Movement as Repository;
+use \InFog\SimpleFinance\Repositories\Movement as MovementRepository;
+use \InFog\SimpleFinance\Entities\Movement;
+use \InFog\SimpleFinance\Types\Money;
+use \InFog\SimpleFinance\Types\Month;
+use \InFog\SimpleFinance\Types\SmallString;
+use \InFog\SimpleFinance\Types\Text;
 
 class MovementTest extends \PHPUnit_Framework_TestCase
 {
@@ -13,7 +18,7 @@ class MovementTest extends \PHPUnit_Framework_TestCase
         $this->pdo = new \PDO(PDO_DSN);
         $this->pdo->exec(file_get_contents(SETUP_DIR . 'create_sqlite_database.sql'));
 
-        $this->repository = new Repository();
+        $this->repository = new MovementRepository();
 
         $this->repository->setPdo($this->pdo);
     }
@@ -25,11 +30,11 @@ class MovementTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateDTO()
     {
-        $movement = new \InFog\SimpleFinance\Entities\Movement();
+        $movement = new Movement();
         $movement->setDate(new \DateTime());
-        $movement->setAmount(new \InFog\SimpleFinance\Types\Money(10));
-        $movement->setName(new \InFog\SimpleFinance\Types\SmallString('Testing DTO'));
-        $movement->setDescription(new \InFog\SimpleFinance\Types\Text('Description of DTO'));
+        $movement->setAmount(new Money(10));
+        $movement->setName(new SmallString('Testing DTO'));
+        $movement->setDescription(new Text('Description of DTO'));
 
         $expected = new \stdClass();
         $expected->id = null;
@@ -74,7 +79,7 @@ class MovementTest extends \PHPUnit_Framework_TestCase
         $this->createAMovement(null, null, new \DateTime('2013-03-18'));
 
         $movementCollection = $this->repository->fetchMonth(
-            new \InFog\SimpleFinance\Types\Month(2013, 3)
+            new Month(2013, 3)
         );
 
         $this->assertInstanceOf('\\InFog\\SimpleFinance\\Collections\\Movement', $movementCollection);
@@ -115,11 +120,11 @@ class MovementTest extends \PHPUnit_Framework_TestCase
         $amount = ($amount) ? $amount : 10;
         $date = ($date) ? $date : new \DateTime();
 
-        $movement = new \InFog\SimpleFinance\Entities\Movement();
+        $movement = new Movement();
         $movement->setDate($date);
-        $movement->setAmount(new \InFog\SimpleFinance\Types\Money($amount));
-        $movement->setName(new \InFog\SimpleFinance\Types\SmallString($name));
-        $movement->setDescription(new \InFog\SimpleFinance\Types\Text('Description of a movement'));
+        $movement->setAmount(new Money($amount));
+        $movement->setName(new SmallString($name));
+        $movement->setDescription(new Text('Description of a movement'));
 
         return $this->repository->save($movement);
     }

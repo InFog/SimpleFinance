@@ -2,6 +2,9 @@
 
 namespace tests\InFog\SimpleFinance\Types;
 
+use \InFog\SimpleFinance\Types\Money;
+use \InFog\SimpleFinance\Types\Money\Config as MoneyConfig;
+
 class MoneyTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -9,12 +12,12 @@ class MoneyTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldThrowExceptionOnInvalidValue()
     {
-        $money = new \InFog\SimpleFinance\Types\Money('a');
+        $money = new Money('a');
     }
 
     public function testShouldFormatMoneyWithDefaultValues()
     {
-        $money = new \InFog\SimpleFinance\Types\Money(1000.99);
+        $money = new Money(1000.99);
 
         $expected = '$ 1,000.99';
         $result = "{$money}";
@@ -24,9 +27,9 @@ class MoneyTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldFormatMoneyWithNewConfig()
     {
-        $money = new \InFog\SimpleFinance\Types\Money(1000.99);
+        $money = new Money(1000.99);
 
-        $config = new \InFog\SimpleFinance\Types\Money\Config();
+        $config = new MoneyConfig();
         $config->setDecimalPoint(',');
         $config->setThousandsSeparator('.');
         $config->setMoneySimbol('R$');

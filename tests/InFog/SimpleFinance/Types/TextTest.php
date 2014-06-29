@@ -2,6 +2,8 @@
 
 namespace tests\InFog\SimpleFinance\Types;
 
+use \InFog\SimpleFinance\Types\Text;
+
 class TextTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -9,7 +11,7 @@ class TextTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldThrowExceptionOnInvalidValue()
     {
-        $string = new \InFog\SimpleFinance\Types\Text(array());
+        $string = new Text(array());
     }
 
     /**
@@ -17,7 +19,7 @@ class TextTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldThrowExceptionOnTextBiggerThan255()
     {
-        $string = new \InFog\SimpleFinance\Types\Text(
+        $string = new Text(
             "Lorem ipsum dolor sit amet, consectetur adipisicing elit,
             sed do eiusmod tempor incididunt ut labore et dolore magna
             aliqua. Ut enim ad minim veniam, quis nostrud exercitation
@@ -31,8 +33,8 @@ class TextTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldCreateTextAndConcatenate()
     {
-        $text1 = new \InFog\SimpleFinance\Types\Text('My testing text');
-        $text2 = new \InFog\SimpleFinance\Types\Text(' is awesome!');
+        $text1 = new Text('My testing text');
+        $text2 = new Text(' is awesome!');
 
         $expected = 'My testing text is awesome!';
         $result = $text1 . $text2;

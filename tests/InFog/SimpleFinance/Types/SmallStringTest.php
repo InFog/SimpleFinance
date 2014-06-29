@@ -2,6 +2,8 @@
 
 namespace tests\InFog\SimpleFinance\Types;
 
+use \InFog\SimpleFinance\Types\SmallString;
+
 class SmallStringTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -9,7 +11,7 @@ class SmallStringTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldThrowExceptionOnInvalidValue()
     {
-        $string = new \InFog\SimpleFinance\Types\SmallString(array());
+        $string = new SmallString(array());
     }
 
     /**
@@ -17,15 +19,15 @@ class SmallStringTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldThrowExceptionOnStringBiggerThan20()
     {
-        $string = new \InFog\SimpleFinance\Types\SmallString(
+        $string = new SmallString(
             "The quick brown fox jumps over the lazy dog"
         );
     }
 
     public function testShouldCreateSmallStringAndConcatenate()
     {
-        $firstName = new \InFog\SimpleFinance\Types\SmallString('Evaldo');
-        $lastName = new \InFog\SimpleFinance\Types\SmallString('Bento');
+        $firstName = new SmallString('Evaldo');
+        $lastName = new SmallString('Bento');
 
         $expected = 'Evaldo Bento';
         $result = "{$firstName} {$lastName}";

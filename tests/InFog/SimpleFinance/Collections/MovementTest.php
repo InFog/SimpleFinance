@@ -2,6 +2,9 @@
 
 namespace tests\InFog\SimpleFinance\Collections;
 
+use \InFog\SimpleFinance\Entities\Movement;
+use \InFog\SimpleFinance\Types\SmallString;
+
 class MovementTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreateCollectionAddAndCountItems()
@@ -14,7 +17,7 @@ class MovementTest extends \PHPUnit_Framework_TestCase
         $result = count($collection);
         $this->assertEquals($expected, $result);
 
-        $m = new \InFog\SimpleFinance\Entities\Movement();
+        $m = new Movement();
         $collection->add($m);
 
         $expected = 2;
@@ -26,10 +29,10 @@ class MovementTest extends \PHPUnit_Framework_TestCase
     {
         $collection = new \InFog\SimpleFinance\Collections\Movement();
 
-        $m1 = new \InFog\SimpleFinance\Entities\Movement();
-        $m1->setName(new \InFog\SimpleFinance\Types\SmallString('First Movement'));
-        $m2 = new \InFog\SimpleFinance\Entities\Movement();
-        $m2->setName(new \InFog\SimpleFinance\Types\SmallString('Second Movement'));
+        $m1 = new Movement();
+        $m1->setName(new SmallString('First Movement'));
+        $m2 = new Movement();
+        $m2->setName(new SmallString('Second Movement'));
 
         $collection->add($m1);
         $collection->add($m2);
