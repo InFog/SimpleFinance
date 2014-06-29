@@ -66,4 +66,14 @@ class MonthTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $result);
     }
+
+    public function testShouldGetMonthName()
+    {
+        $month = new Month(2014, 6);
+
+        $expected = "June";
+        $result = "{$month}";
+
+        $this->assertEquals($expected, $result);
+    }
 }

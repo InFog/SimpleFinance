@@ -2,6 +2,8 @@
 
 namespace InFog\SimpleFinance\Types;
 
+use \InFog\SimpleFinance\Types\Money\Config as MoneyConfig;
+
 class Money implements Typeable
 {
     /**
@@ -11,12 +13,12 @@ class Money implements Typeable
     private $value;
 
     /**
-     * @var \InFog\SimpleFinance\Types\Money\Config
+     * @var MoneyConfig
      * @access private
      */
     private $config;
 
-    public function __construct($value, \InFog\SimpleFinance\Types\Money\Config $config = null)
+    public function __construct($value, MoneyConfig $config = null)
     {
         if (! is_numeric($value)) {
             throw new \InvalidArgumentException('$value must be numeric!');
@@ -25,9 +27,9 @@ class Money implements Typeable
         $this->setConfig($config);
     }
 
-    public function setConfig(\InFog\SimpleFinance\Types\Money\Config $config = null)
+    public function setConfig(MoneyConfig $config = null)
     {
-        $this->config = new \InFog\SimpleFinance\Types\Money\Config();
+        $this->config = new MoneyConfig();
         if ($config) {
             $this->config = $config;
         }

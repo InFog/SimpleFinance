@@ -2,6 +2,10 @@
 
 namespace InFog\SimpleFinance\Entities;
 
+use \InFog\SimpleFinance\Types\Money;
+use \InFog\SimpleFinance\Types\SmallString;
+use \InFog\SimpleFinance\Types\Text;
+
 class Movement
 {
     /**
@@ -17,19 +21,19 @@ class Movement
     private $date;
 
     /**
-     * @var \InFog\SimpleFinance\Types\Money
+     * @var Money
      * @access private
      */
     private $amount;
 
     /**
-     * @var \InFog\SimpleFinance\Types\SmallString
+     * @var SmallString
      * @access private
      */
     private $name;
 
     /**
-     * @var \InFog\SimpleFinance\Types\Text
+     * @var Text
      * @access private
      */
     private $description;
@@ -40,9 +44,9 @@ class Movement
 
         $movement->setId((isset($data['id'])) ? $data['id'] : null);
         $movement->setDate(new \DateTime($data['date']));
-        $movement->setAmount(new \InFog\SimpleFinance\Types\Money($data['amount']));
-        $movement->setName(new \InFog\SimpleFinance\Types\SmallString($data['name']));
-        $movement->setDescription(new \InFog\SimpleFinance\Types\Text($data['description']));
+        $movement->setAmount(new Money($data['amount']));
+        $movement->setName(new SmallString($data['name']));
+        $movement->setDescription(new Text($data['description']));
 
         return $movement;
     }
@@ -67,7 +71,7 @@ class Movement
         return $this->date;
     }
 
-    public function setAmount(\InFog\SimpleFinance\Types\Money $amount)
+    public function setAmount(Money $amount)
     {
         $this->amount = $amount;
     }
@@ -77,7 +81,7 @@ class Movement
         return $this->amount;
     }
 
-    public function setName(\InFog\SimpleFinance\Types\SmallString $name)
+    public function setName(SmallString $name)
     {
         $this->name = $name;
     }
@@ -87,7 +91,7 @@ class Movement
         return $this->name;
     }
 
-    public function setDescription(\InFog\SimpleFinance\Types\Text $description)
+    public function setDescription(Text $description)
     {
         $this->description = $description;
     }

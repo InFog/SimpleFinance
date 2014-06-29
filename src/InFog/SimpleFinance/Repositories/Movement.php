@@ -4,6 +4,10 @@ namespace InFog\SimpleFinance\Repositories;
 
 use \Respect\Relational\Mapper;
 
+use \InFog\SimpleFinance\Entities\Movement as MovementEntity;
+use \InFog\SimpleFinance\Collections\Movement as MovementCollection;
+use \InFog\SimpleFinance\Types\Month;
+
 class Movement
 {
     /**
@@ -40,7 +44,7 @@ class Movement
         return $this->mapper;
     }
 
-    public function save(\InFog\SimpleFinance\Entities\Movement $movement)
+    public function save(MovementEntity $movement)
     {
         $movementDTO = $this->createDTO($movement);
 
@@ -56,7 +60,7 @@ class Movement
         $mapper = $this->getMapper();
         $movementDTO = $mapper->movement($conditions)->fetch();
 
-        return \InFog\SimpleFinance\Entities\Movement::createFromArray(
+        return MovementEntity::createFromArray(
             (array) $movementDTO
         );
     }
@@ -71,7 +75,7 @@ class Movement
         return $this->createCollection($mapper->movement->fetchAll());
     }
 
-    public function fetchMonth(\InFog\SimpleFinance\Types\Month $month)
+    public function fetchMonth(Month $month)
     {
         /**
          * TODO There is a bug in \Respect\Relational when using >= and <= on the same column
@@ -113,16 +117,16 @@ class Movement
 
     private function createCollection(array $movements)
     {
-        $collection = new \InFog\SimpleFinance\Collections\Movement();
+        $collection = new MovementCollection();
 
         foreach ($movements as $movement) {
-            $collection->add(\InFog\SimpleFinance\Entities\Movement::createFromArray((array) $movement));
+            $collection->add(MovementEntity::createFromArray((array) $movement));
         }
 
         return $collection;
     }
 
-    public function createDTO(\InFog\SimpleFinance\Entities\Movement $movement)
+    public function createDTO(MovementEntity $movement)
     {
         $dto = new \stdClass();
 

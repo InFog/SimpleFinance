@@ -57,4 +57,9 @@ class Month implements Typeable
 
         return new \DateTime("{$this->year}-{$this->month}-{$lastDay}");
     }
+
+    public function __toString()
+    {
+        return $this->getFirstDay()->format('F');
+    }
 }

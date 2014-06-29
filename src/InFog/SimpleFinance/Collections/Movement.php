@@ -2,12 +2,14 @@
 
 namespace InFog\SimpleFinance\Collections;
 
+use \InFog\SimpleFinance\Entities\Movement as MovementEntity;
+
 class Movement implements \Countable, \IteratorAggregate
 {
 
     private $items = array();
 
-    public function add(\InFog\SimpleFinance\Entities\Movement $movement)
+    public function add(MovementEntity $movement)
     {
         array_push($this->items, $movement);
     }
