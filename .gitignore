@@ -1,6 +1,7 @@
-vendor/
+bin
+vendor
 *.swp
-build/
+build
 phpunit.xml
 composer.lock
 .idea
